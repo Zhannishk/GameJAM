@@ -70,8 +70,10 @@ room_g_bed = pygame.image.load('background/room_g_bed.png')
 room_g_bed = pygame.transform.scale_by(room_g_bed, (20,17))
 room_g_bed_rect = room_g_bed.get_rect(center=(640,400))
 #all sounds
-user_select = pygame.mixer.Sound('sounds/user_select.mp3')
+user_select = pygame.mixer.Sound('sounds/user_select.wav')
 start = pygame.mixer.Sound('sounds/start.mp3')
+main_menu_music = pygame.mixer.Sound('sounds/main-menu.mp3')
+# collis = pygame.mixer.Sound('sounds/')
 
 #Defolt player
 player = boy
@@ -80,6 +82,7 @@ room = room_boy
 room_rect = room_boy_rect
 room_bed = room_b_bed
 room_bed_rect = room_b_bed_rect
+
 
 while True:
     for event in pygame.event.get():
@@ -96,6 +99,7 @@ while True:
                     room_rect = room_bed_rect
 
     if game_active:
+        main_menu_music.stop()
         start_time += 1
         screen.fill('black')
         screen.blit(room, room_rect)
@@ -107,9 +111,9 @@ while True:
             screen.blit(pygame.transform.scale_by(player, (1.5,1.5)), (700, 200))
 
 
-
-
     else:
+        if not main_menu_music.get_num_channels():
+            main_menu_music.play(loops=-1)
         screen.blit(menu_bg, menu_bg_rect)
         screen.blit(game_name, game_name_rect)
         screen.blit(game_name_yellow, game_name_yellow_rect)
@@ -118,6 +122,7 @@ while True:
         screen.blit(boy, boy_rect)
         screen.blit(girl, girl_rect)
         screen.blit(arrow, arrow_rect)
+
         if pygame.mouse.get_pressed()[0]:
             if not mouse_pressed:
                 if start_button_rect.collidepoint(pygame.mouse.get_pos()):
