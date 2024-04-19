@@ -94,16 +94,6 @@ room_rect = room_boy_rect
 room_bed = room_b_bed
 room_bed_rect = room_b_bed_rect
 
-
-def screen_shake(screen, duration, magnitude):
-    offsets = []
-    for _ in range(duration):
-        offset_x = random.randint(-magnitude, magnitude)
-        offset_y = random.randint(-magnitude, magnitude)
-        offsets.append((offset_x, offset_y))
-    return offsets
-
-
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -142,8 +132,6 @@ while True:
         screen.fill('black')
         screen.blit(room, room_rect)
         screen.blit(door, door_rect)
-        if start_time >= 500:  # 10 seconds with 60 FPS
-            screen_shake(screen, 500, 10)
         if start_time >= 1000:
             show_rule_wake_up = True
         if show_rule_wake_up:
