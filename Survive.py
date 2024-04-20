@@ -137,11 +137,12 @@ while True:
         screen.fill('black')
         screen.blit(room, room_rect)
         screen.blit(door, door_rect)
-        if start_time >= 1000:
+        if start_time >= 3000:
             show_rule_wake_up = True
         if show_rule_wake_up:
             screen.blit(rule_wake_up, rule_wake_up_rect)
         if space_count >= 3:
+            show_rule_wake_up = False
             screen.blit(pygame.transform.scale_by(player, (1.3, 1.3)), (pos, 250))
 
         if maze_active:
@@ -191,10 +192,10 @@ while True:
                     while self.running:
                         self.screen.fill("white")
                         self.screen.fill(pygame.Color("black"), (1100, 0, 800, 800))
-                        for event in pygame.event.get():
-                            if event.type == pygame.QUIT:
-                                pygame.quit()
-                                sys.exit()
+                        # for event in pygame.event.get():
+                        #     if event.type == pygame.QUIT:
+                        #         pygame.quit()
+                        #         sys.exit()
                         # if keys were pressed still
                         if event.type == pygame.KEYDOWN:
                             if not self.game_over:
@@ -236,7 +237,7 @@ while True:
                 screen = pygame.display.set_mode(screen)
 
                 game = Main(screen)
-                game.main(window_size, tile_size)
+                game.main((1130, 800), 100)
 
 
     else:
@@ -252,31 +253,36 @@ while True:
         screen.blit(arrow, arrow_rect)
 
         if pygame.mouse.get_pressed()[0]:
-            if start_button_rect.collidepoint(pygame.mouse.get_pos()):
-                user_select.play()
-                game_active = True
-                menu_active = False
+            if not mouse_pressed:
+                if start_button_rect.collidepoint(pygame.mouse.get_pos()):
+                    user_select.play()
+                    game_active = True
+                    menu_active = False
 
-            # selecting player
-            if boy_rect.collidepoint(pygame.mouse.get_pos()):
-                arrow_rect = arrow.get_rect(midbottom=(180, 310))
-                user_select.play()
-                player = boy
-                player_rect = boy_rect
-                room = room_boy
-                room_rect = room_boy_rect
-                room_bed = room_b_bed
-                room_bed_rect = room_b_bed_rect
+                # selecting player
+                if boy_rect.collidepoint(pygame.mouse.get_pos()):
+                    arrow_rect = arrow.get_rect(midbottom=(180, 310))
+                    user_select.play()
+                    player = boy
+                    player_rect = boy_rect
+                    room = room_boy
+                    room_rect = room_boy_rect
+                    room_bed = room_b_bed
+                    room_bed_rect = room_b_bed_rect
 
-            if girl_rect.collidepoint(pygame.mouse.get_pos()):
-                arrow_rect = arrow.get_rect(midbottom=(380, 310))
-                user_select.play()
-                player = girl
-                player_rect = girl_rect
-                room = room_girl
-                room_rect = room_girl_rect
-                room_bed = room_g_bed
-                room_bed_rect = room_g_bed_rect
+                if girl_rect.collidepoint(pygame.mouse.get_pos()):
+                    arrow_rect = arrow.get_rect(midbottom=(380, 310))
+                    user_select.play()
+                    player = girl
+                    player_rect = girl_rect
+                    room = room_girl
+                    room_rect = room_girl_rect
+                    room_bed = room_g_bed
+                    room_bed_rect = room_g_bed_rect
+            mouse_pressed = True
+        else:
+            mouse_pressed = False
+
 
     pygame.display.update()
     clock.tick(60)
