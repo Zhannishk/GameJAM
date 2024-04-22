@@ -73,10 +73,10 @@ room_g_bed = pygame.image.load('background/room_g_bed.png')
 room_g_bed = pygame.transform.scale_by(room_g_bed, (20, 17))
 room_g_bed_rect = room_g_bed.get_rect(center=(640, 400))
 # Final window
-win = pygame.image.load('background/win_end.PNG')
+win = pygame.image.load('background/win_end.png')
 win = pygame.transform.scale(win, (1280, 800))
 win_rect = win.get_rect()
-lost = pygame.image.load('background/lose_end.png')
+lost = pygame.image.load('background/lost_end.png')
 lost = pygame.transform.scale(lost, (1280, 800))
 lost_rect = lost.get_rect()
 # doors
@@ -91,6 +91,7 @@ siren = pygame.mixer.Sound('sounds/siren.mp3')
 main_music = pygame.mixer.Sound('sounds/main-menu.mp3')
 lullaby = pygame.mixer.Sound('sounds/lullaby.mp3')
 lost_song = pygame.mixer.Sound('sounds/lost.mp3')
+winny = pygame.mixer.Sound('sounds/winny.mp3')
 #Defolt player
 player_x = boy
 player_rect = boy_rect
@@ -285,13 +286,13 @@ while True:
                 screen.blit(win, win_rect)
                 screen.blit(player_x, player_rect)
                 siren.stop()
-                screen.blit(test_font.render('You survived!', False, 'black'), test_font.render('You survived!',False, 'black').get_rect(center=(620,200)))
+                winny.play()
             else:
                 screen.blit(lost, lost_rect)
                 screen.blit(player_x, player_rect)
                 siren.stop()
-                screen.blit(test_font.render('You died :(',False, 'black'), test_font.render('You died :(',False, 'black').get_rect(center=(620,200)))
                 lost_song.play()
+
 
 
 

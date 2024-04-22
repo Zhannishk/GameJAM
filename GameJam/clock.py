@@ -12,7 +12,7 @@ class Clock:
 
     # Start the timer
     def start_timer(self):
-        self.start_time = 1800  # 30 minutes in seconds (1800 seconds)
+        self.start_time = 1200  # 20 seconds
 
     # Update the timer
     def update_timer(self):
